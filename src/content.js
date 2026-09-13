@@ -10,7 +10,27 @@
     if (window === window.top) {
         window.addEventListener('message', (event) => {
             if (event.data && event.data.type === 'AUTONEXT_VIDEO_ENDED') {
-                navigateNext();
+                navigate(1);
+            }
+        });
+
+        chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            if (request.action === 'NEXT_EPISODE') {
+                navigate(1);
+            }
+
+            if (request.action === 'PREV_EPISODE') {
+                navigate(-1);
+            }
+
+            if (request.action === 'GET_INFO') {
+                const titleElem = document.querySelector('.post-title, h1, h3');
+                const thumbElem = document.querySelector('.post-body img, .entry-content img, .separator img');
+
+                sendResponse({
+                    title: titleElem ? titleElem.innerText : document.title,
+                    thumbnail: thumbElem ? thumbElem.src : ''
+                });
             }
         });
 
@@ -63,7 +83,7 @@
                     console.log('finalizó el cap');
 
                     if (window === window.top) {
-                        navigateNext();
+                        navigate(1);
                     } else {
                         window.top.postMessage({ type: 'AUTONEXT_VIDEO_ENDED' }, '*');
                     }
@@ -74,14 +94,16 @@
         }
     }
 
-    function navigateNext() {
+    function navigate(direction) {
         const currentUrl = cleanUrl(window.top.location.href);
         const currentIndex = PLAYLIST.findIndex(url => cleanUrl(url) === currentUrl);
 
         console.log('uri actual; ', currentUrl);
 
-        if (currentIndex !== -1 && currentIndex + 1 < PLAYLIST.length) {
-            const nextUrl = PLAYLIST[currentIndex + 1];
+        const targetIndex = currentIndex + direction;
+
+        if (currentIndex !== -1 && targetIndex >= 0 && targetIndex < PLAYLIST.length) {
+            const nextUrl = PLAYLIST[targetIndex];
             console.log('siguiente uri: ', nextUrl);
 
             window.top.location.href = nextUrl;

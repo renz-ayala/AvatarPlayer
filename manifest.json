@@ -8,6 +8,10 @@
     "48": "assets/play.png",
     "128": "assets/play.png"
   },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": "assets/play.png"
+  },
   "content_scripts": [
     {
       "matches": [
