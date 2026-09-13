@@ -1,0 +1,13 @@
+# WebStorm
+.idea/
+
+# Node
+node_modules/
+package-lock.json
+
+# System
+.DS_Store
+Thumbs.db
+*.log
+
+src/playlist.js

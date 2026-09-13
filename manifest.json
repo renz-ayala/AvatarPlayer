@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Avatar AutoPlay & Next",
+  "version": "1.0.0",
+  "description": "Automates video playback and episode navigation on Blogspot",
+  "icons": {
+    "16": "assets/play.png",
+    "48": "assets/play.png",
+    "128": "assets/play.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.blogspot.com/*",
+        "https://*.blogger.com/*",
+        "https://www.blogger.com/video.g*",
+        "https://*.googlevideo.com/*",
+        "https://*.youtube.com/*",
+        "https://*.youtube-nocookie.com/*",
+        "https://youtube.googleapis.com/*",
+        "https://*.googleapis.com/*"
+      ],
+      "js": [
+        "src/content.js",
+        "src/playlist.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ]
+}
