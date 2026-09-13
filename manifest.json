@@ -19,7 +19,6 @@
         "https://*.blogger.com/*",
         "https://www.blogger.com/video.g*",
         "https://*.googlevideo.com/*",
-        "https://*.youtube.com/*",
         "https://*.youtube-nocookie.com/*",
         "https://youtube.googleapis.com/*",
         "https://*.googleapis.com/*"
