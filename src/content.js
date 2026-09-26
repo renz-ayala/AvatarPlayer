@@ -40,7 +40,8 @@
                 return;
             }
 
-            const target = document.querySelector('.post-body iframe, .post-body, .post-title');
+            // const target = document.querySelector('.post-body iframe, .post-body, .post-title');
+            const target = document.querySelector('.descriptionwrapper, .description');
 
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
